@@ -1,11 +1,10 @@
 import logging
 import os
 import time
-from typing import Module
 
 import logger
 
-logger: Module = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 
 def make_directory():
