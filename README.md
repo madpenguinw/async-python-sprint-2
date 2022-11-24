@@ -68,12 +68,14 @@ pytest -vv
 ```
 Чтобы увидеть покрытие кода тестами:
 ```
-pytest --cov=. app/tests/ --cov-report xml:cov.xml
+pytest --cov=. tests/ --cov-report xml:cov.xml
 ```
 Если в качестве IDE используется VSCode, необходимо установить расширения python и coverage gutters, после чего открыть терминал, и в выходных данных выбрать coverage-gutters.
 
 ## Об авторе
+```
 developed_by = {'author': 'Mikhail Sokolov',
                 'university': 'ITMO',
                 'telegram': 't.me/lmikhailsokolovl',
                 'is_it_funny': Yes}
+```
