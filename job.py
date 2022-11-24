@@ -1,26 +1,14 @@
 import logging
 import time
 from multiprocessing import Process
+from typing import Callable, Generator
 
-FORMAT = '%(asctime)s - %(name)s - %(funcName)s - %(levelname)s - %(message)s'
-DATEFMT = '%Y-%m-%dT%H:%M:%S'
-
-logging.basicConfig(
-    format=FORMAT,
-    datefmt=DATEFMT,
-    level=logging.INFO,
-)
-
-formatter = logging.Formatter(
-    FORMAT,
-    datefmt=DATEFMT
-)
-
+import logger
 
 logger = logging.getLogger(__name__)
 
 
-def time_limit(func, time):
+def time_limit(func: Callable, time: int) -> None:
     """Runs a function with a time limit"""
     p = Process(target=func)
     p.start()
@@ -31,9 +19,9 @@ def time_limit(func, time):
     return
 
 
-def coroutine(f):
-    def wrap(*args, **kwargs):
-        gen = f(*args, **kwargs)
+def coroutine(func: Callable) -> Callable:
+    def wrap(*args, **kwargs) -> Generator:
+        gen = func(*args, **kwargs)
         gen.send(None)
         return gen
     return wrap
@@ -42,18 +30,19 @@ def coroutine(f):
 class Job:
     def __init__(
         self,
-        func,
-        start_at=0,
-        max_working_time=0,
-        tries=0,
+        func: Callable,
+        start_at: int = 0,
+        max_working_time: int = 0,
+        tries: int = 0,
     ):
         self.tries = tries
         self.func = func
         self.start_at = start_at
         self.max_working_time = max_working_time
 
+    @staticmethod
     @coroutine
-    def run():
+    def run() -> Generator:
         logger.info("Job's coroutine is running")
         while True:
             try:
@@ -74,14 +63,15 @@ class Job:
                 else:
                     task()
                 tries = 0
-            except GeneratorExit or StopIteration:
+            except GeneratorExit and StopIteration:
                 logger.info("Job's coroutine is finished")
                 raise
             except Exception as error:
-                print(error)
+                str_error: str = str(error)
+                logger.error(str_error)
                 attempt = 1
                 while tries:
-                    logger.error(error)
+                    logger.error(str_error)
                     logger.error('Attempt № %(attempt)s', {'attempt': attempt})
                     attempt += 1
                     tries -= 1

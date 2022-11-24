@@ -2,22 +2,11 @@ import logging
 import os
 import time
 
-FORMAT = '%(asctime)s - %(name)s - %(funcName)s - %(levelname)s - %(message)s'
-DATEFMT = '%Y-%m-%dT%H:%M:%S'
+import logger
 
-logging.basicConfig(
-    format=FORMAT,
-    datefmt=DATEFMT,
-    level=logging.INFO,
-)
+from typing import Module
 
-formatter = logging.Formatter(
-    FORMAT,
-    datefmt=DATEFMT
-)
-
-
-logger = logging.getLogger(__name__)
+logger: Module = logging.getLogger(__name__)
 
 
 def make_directory():

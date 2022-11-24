@@ -1,4 +1,4 @@
-# Проектное задание второго спринта
+# Проектное задание второго спринта курса Асинхронное программирование на Python Яндекс.Практикума
 
 Спроектировать и реализовать планировщик задач для выполнения поступающих задач.
 
@@ -47,3 +47,33 @@
 3. Сигнатура описания классов может быть изменена под ваше усмотрение. Создавать дополнительные классы не запрещено.
 4. Используйте примитивы синхронизации, например, [Timer](https://docs.python.org/3/library/threading.html#timer-objects) или [Condition](https://docs.python.org/3/library/threading.html#condition-objects).
 5. По возможности, решение должно полностью строиться на использовании корутин.
+
+## Установка проекта и настройка виртуального окружения
+В случае, если будет выдаваться ошибка, что нет команды "python3", используйте вместо нее команду "python" без тройки.
+```
+git clone https://github.com/madpenguinw/async-python-sprint-2.git
+
+python3 -m venv venv
+
+source venv/bin/activate
+
+pip install --upgrade pip
+
+python3 -m pip install -r requirements.txt
+```
+
+## Тестирование
+```
+pytest -vv
+```
+Чтобы увидеть покрытие кода тестами:
+```
+pytest --cov=. app/tests/ --cov-report xml:cov.xml
+```
+Если в качестве IDE используется VSCode, необходимо установить расширения python и coverage gutters, после чего открыть терминал, и в выходных данных выбрать coverage-gutters.
+
+## Об авторе
+developed_by = {'author': 'Mikhail Sokolov',
+                'university': 'ITMO',
+                'telegram': 't.me/lmikhailsokolovl',
+                'is_it_funny': Yes}
