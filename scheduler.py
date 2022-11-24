@@ -1,5 +1,4 @@
 import logging
-
 from typing import Optional
 
 import logger
@@ -43,4 +42,3 @@ class Scheduler:
                 task.start_at,
                 task.max_working_time,
             ))
- 

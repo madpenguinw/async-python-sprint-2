@@ -1,5 +1,5 @@
-from scheduler import Scheduler
 from job import Job
+from scheduler import Scheduler
 
 
 def first_job():

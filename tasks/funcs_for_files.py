@@ -1,10 +1,9 @@
 import logging
 import os
 import time
+from typing import Module
 
 import logger
-
-from typing import Module
 
 logger: Module = logging.getLogger(__name__)
 
